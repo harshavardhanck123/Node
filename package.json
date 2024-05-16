@@ -1,0 +1,19 @@
+{
+  "name": "learnnode",
+  "version": "1.0.0",
+  "description": "App to learn Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshavardhanck123/Node.git"
+  },
+  "author": "Harshavardhan",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.6.1"
+  }
+}
