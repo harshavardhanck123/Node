@@ -1,3 +1,5 @@
+
+```js
 const { MongoClient } = require('mongodb');
 
 const connectDB=async()=>{
@@ -74,3 +76,41 @@ const server=http.createServer((req,res)=>{
 server.listen(3001,()=>{
     console.log("Server is running on http://127.0.0.1:3001");
 })
+
+app.listen(3001, () => {
+ console.log("Server is running on http://127.0.0.1:3001");
+});
+
+
+const Company = require('../models/company');
+const User = require('../models/user');
+const { request } = require('express')
+
+const companyController={
+    createCompany: async(request,response)=>{
+        try{
+            const {name,location}=request.body;
+
+            const userId=request.userId;
+
+            const company = await Company.findOne({ name })
+            if (company) {
+                return response.status(400).json({ message: 'Company already exists' })
+            }
+
+            const newCompany=new Company({
+                name,
+                location,
+                createdBy:userId
+            })  
+            const savedCompany = await newCompany.save();
+            response.json({ message: 'Company Registered', user: savedCompany })
+        }
+        catch(error){
+            response.status(500).json({message:error.message});
+        }
+    }
+}
+
+module.exports = companyController;
+```
